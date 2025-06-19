@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LastCurb – The Curb Intelligence API</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #111;
+      line-height: 1.6;
+    }
+    .container {
+      width: 100%;
+      max-width: 1800px;
+      margin: 0 auto;
+      padding: 0 64px;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 0;
+      border-bottom: 1px solid #eee;
+    }
+    nav a {
+      margin-left: 32px;
+      color: #0a84ff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .hero {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 64px;
+      background: linear-gradient(145deg, #f0f7ff, #d6e9ff);
+      overflow: hidden;
+    }
+    .hero-right {
+      flex: 1.5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .hero-left {
+      flex: 1.5;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+    }
+    .hero h1 {
+      font-size: 5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      text-align: right;
+      line-height: 1.2;
+    }
+    .hero h1 .highlight {
+      display: inline-block;
+      padding: 0.1em 0.3em;
+      background: #0a84ff;
+      color: #fff;
+      border-radius: 6px;
+      transition: background 0.3s;
+    }
+    .tagline {
+      color: #0a84ff;
+      font-weight: 600;
+      font-size: 2rem;
+      margin-bottom: 24px;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      max-width: 800px;
+      margin-bottom: 40px;
+    }
+    .button {
+      background: #0a84ff;
+      color: #fff;
+      padding: 18px 36px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: 0.3s ease;
+      font-size: 1.3rem;
+      margin-top: 30px;
+    }
+    .button:hover {
+      background: #0066cc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div style="display: flex; align-items: center;">
+        <img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="LastCurb Logo" style="height: 40px; margin-right: 14px; border-radius: 6px;" />
+        <span style="font-weight: 800; font-size: 1.5rem;">LASTCURB</span>
+      </div>
+      <nav>
+        <a href="#api">API</a>
+        <a href="#demo">Demo</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <div class="hero">
+      <div class="hero-right">
+        <div class="tagline">The Curb Intelligence API for the Future of Movement</div>
+        <p>
+          LastCurb powers autonomous fleets, delivery vehicles, emergency services, and logistics ops with real-time curb intelligence.
+          Stream live, machine-readable curb availability directly into your stack.
+        </p>
+        <a href="#demo" class="button">Launch Demo</a>
+      </div>
+      <div class="hero-left">
+        <h1><span class="highlight" id="subject-text">Waymo fleets</span><br/>need to know where to stop.</h1>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const subjects = [
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Waymo fleets',
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Uber drivers',
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Doordashers',
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Amazon Drivers',
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">UPS trucks',
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">FedEx vans',
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Lyft rides',
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Zoox bots',
+      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Tesla drivers'
+    ];
+
+    let idx = 0;
+    function rotateSubject() {
+      const elText = document.getElementById('subject-text');
+      elText.innerHTML = subjects[idx];
+      idx = (idx + 1) % subjects.length;
+    }
+    setInterval(rotateSubject, 2000);
+  </script>
+</body>
+</html>

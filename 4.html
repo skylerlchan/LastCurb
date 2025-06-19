@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LastCurb – The Curb Intelligence API</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 100%;
+    margin: 32 px auto;
+    padding: 0 2rem;
+  }
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px 0;
+    border-bottom: 2px solid #eee;
+  }
+  nav a {
+    margin-left: 32px;
+    color: #0051ff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    color: #000;
+  }
+  .hero {
+    padding: 100px 0 60px;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    max-width: 1000px;
+    margin: 0 auto 24px;
+    color: #111;
+  }
+  .hero h1 .highlight {
+    display: inline-block;
+    padding: 0.1em 0.3em;
+    background: #000;
+    color: #fff;
+    font-weight: 800;
+    font-family: monospace;
+    border-radius: 6px;
+  }
+  .tagline {
+    color: #0051ff;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 24px;
+  }
+  .hero p {
+    font-size: 1.1rem;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    color: #333;
+  }
+  .button {
+    background: #000;
+    color: #fff;
+    padding: 14px 32px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: 0.2s ease;
+  }
+  .button:hover {
+    background: #111;
+    transform: translateY(-2px);
+  }
+  section {
+    padding: 80px 0;
+    border-top: 1px solid #eee;
+  }
+  h2 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .grid-item img {
+    width: 100%;
+    border-radius: 8px;
+    margin-top: 20px;
+  }
+  pre {
+    background: #f7f9fa;
+    padding: 24px;
+    border-left: 6px solid #0051ff;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: monospace;
+    overflow-x: auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  .slot-nearby {
+  opacity: 0.4;
+  }
+  footer {
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 48px 0;
+    color: #888;
+    border-top: 1px solid #eee;
+    margin-top: 60px;
+  }
+  .slot-item {
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-size: 2.5rem;
+  font-weight: 600;
+  opacity: 0.15;
+  transition: all 0.4s ease;
+  padding: 1rem 2rem;
+  color: #444;
+  }
+  .slot-item img {
+  height: 2.2em;
+  margin-right: 0.8ch;
+  opacity: 0.9;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .slot-active {
+  opacity: 1 !important;
+  font-weight: 900;
+  transform: scale(1.1);
+  color: #000;
+  }
+  .slot-active img {
+  transform: scale(1.15);
+  opacity: 1;
+  }
+
+
+  </style>
+
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div style="display: flex; align-items: center;">
+        '<img src="Logos/lastcurb-logo.png" alt="LastCurb Logo" style="height: 32px; margin-right: 12px; border-radius: 6px;" />
+        <span style="font-weight: 800; font-size: 1.2rem;">LASTCURB</span>
+      </div>
+      <nav>
+        <a href="#api">API</a>
+        <a href="#demo">Demo</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+  <div id="slot-hero" style="width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #fff; padding: 0; overflow: hidden;">
+  
+  <h1 style="font-size: 2.5rem; font-weight: 800; text-align: center; display: flex; align-items: center; flex-wrap: wrap;">
+    <span id="fade-subject" style="opacity: 0; transition: opacity 0.5s ease-in-out; margin-right: 0.5ch;">Waymo fleets</span>
+    need to know where to stop.
+  </h1>
+
+  <a href="#demo" class="button" style="margin-top: 3rem; font-size: 1.4rem; padding: 18px 48px; background: #000; color: #fff; font-weight: 800; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+    Launch Demo
+  </a>
+  </div>
+
+<script>
+  const fadeSubjects = [
+    "Waymo fleets",
+    "Uber drivers",
+    "Amazon shippers",
+    "FedEx vans",
+    "Tesla Autopilot",
+    "You"
+  ];
+  let fadeIdx = 0;
+  const fadeEl = document.getElementById("fade-subject");
+
+  function rotateFade() {
+    fadeEl.style.opacity = 0;
+    setTimeout(() => {
+      fadeEl.textContent = fadeSubjects[fadeIdx % fadeSubjects.length];
+      fadeEl.style.opacity = 1;
+      fadeIdx++;
+    }, 300); // fade out duration
+  }
+
+  rotateFade();
+  setInterval(rotateFade, 2500);
+</script>
+
+
+    <div id="slot-hero" style="width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; background: #fff; padding: 0; overflow: hidden;">
+
+  <div style="display: flex; align-items: center; justify-content: center; position: relative; z-index: 1;">
+    
+    <!-- Slot Viewport -->
+    <div id="slot-mask" style="height: 25rem; overflow: hidden; position: relative;">
+      
+      <!-- Top and bottom fade gradient -->
+      <div style="position: absolute; top: 0; height: 100%; width: 100%; z-index: 2; pointer-events: none;
+          background: linear-gradient(to bottom, #fff 0%, rgba(255,255,255,0.5) 20%, rgba(255,255,255,0.5) 80%, #fff 100%);">
+      </div>
+
+      <!-- Slot Machine Track -->
+      <div id="slot-track" style="display: flex; flex-direction: column; position: relative; z-index: 1; will-change: transform;"></div>
+    </div>
+
+    <!-- Static right-side headline -->
+    <span style="font-size: 3.5rem; font-weight: 900; margin-left: 1.2ch; color: #111;">need to know where to stop.</span>
+  </div>
+
+  <!-- CTA -->
+  <a href="#demo" class="button" style="margin-top: 3rem; font-size: 1.4rem; padding: 18px 48px; background: #000; color: #fff; font-weight: 800; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.2); transition: all 0.3s ease;">
+    Launch Demo
+  </a>
+    </div>
+
+
+
+  <a href="#demo" class="button" style="margin-top: 2.5rem; font-size: 1.25rem; padding: 18px 40px;">Launch Demo</a>
+    </div>
+
+
+    <section id="problem">
+      <h2>The Problem</h2>
+      <p style="text-align:center; max-width: 800px; margin: 0 auto;">
+        Robotaxis don’t know where to pull over. Cities can’t enforce curb rules in real time.
+        Drivers block lanes. Deliveries cause chaos. No system tells machines when, where, and for how long they can legally stop.
+      </p>
+    </section>
+
+    <section id="solution">
+      <h2>The Solution</h2>
+      <div style="text-align:center; max-width: 800px; margin: 0 auto;">
+        <h3>For Autonomous Fleets</h3>
+        <p>
+          Plug our API into your navigation stack and receive live curb legality, availability, and duration limits in real-time.
+          Stop wasting time and risking violations.
+        </p>
+        <img src="https://media.giphy.com/media/JtBZmRM9v8sCQ8NBmn/giphy.gif" alt="Robotaxi Animation" />
+      </div>
+    </section>
+
+    <section id="api">
+      <h2>Our API</h2>
+      <pre>
+GET /curb-availability?lat=37.7749&lon=-122.4194
+
+{
+  "legal": true,
+  "available": true,
+  "confidence": 0.94,
+  "reason": "green curb, no restrictions now",
+  "next_available": "11:30 AM",
+  "duration_limit": "30 min"
+}
+      </pre>
+      <p style="text-align:center;">RESTful. Real-time. Machine-readable. The curb as code.</p>
+    </section>
+
+    <section id="demo">
+      <h2>Live Demo</h2>
+      <p style="text-align:center;">View our pilot map of San Francisco. See where curb space is legal and available—streamed live from the street.</p>
+      <div style="text-align:center;">
+        <a href="index.html" class="button">Try Demo</a>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Get In Touch</h2>
+      <p style="text-align:center;">
+        Want to deploy LastCurb in your fleet or city?
+        Contact us at <a href="mailto:skyler@lastcurb.com" style="color:#0a84ff;">founder@lastcurb.com</a>
+      </p>
+    </section>
+
+    <footer>
+      &copy; 2025 LastCurb. API-first curbspace infrastructure.
+    </footer>
+  </div>
+
+  <script>
+const subjects = [
+  { logo: "Logos/Waymo.png", label: "fleets" },
+  { logo: "Logos/Uber.jpg", label: "drivers" },
+  { logo: "Logos/Doordash.jpg", label: "deliverers" },
+  { logo: "Logos/Fedex.png", label: "vans" },
+  { logo: "Logos/Amazon.png", label: "deliverers" },
+  { logo: "Logos/Lyft.png", label: "drivers" },
+  { logo: "Logos/Instacart.png", label: "shoppers" },
+  { logo: "Logos/UPS.png", label: "trucks" },
+  { logo: "Logos/Tesla_logo.png", label: "autopilot" },
+];
+
+const track = document.getElementById("slot-track");
+
+// Fill the track twice for infinite scrolling
+for (let i = 0; i < 2; i++) {
+  subjects.forEach(({ logo, label }) => {
+    const item = document.createElement("div");
+    item.className = "slot-item";
+    item.innerHTML = `
+      <div style="width: 120px; height: 40px; display: flex; align-items: center; justify-content: center; margin-right: 0.8ch;">
+        <img src="${logo}" alt="${label}" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+      </div>
+      ${label}`;
+    track.appendChild(item);
+  });
+}
+
+let scrollY = 0;
+const itemHeight = 100; // px
+const totalItems = subjects.length;
+const speed = 0.8;
+
+function animateSlot() {
+  scrollY += speed;
+  const loopPoint = itemHeight * totalItems;
+  if (scrollY >= loopPoint) scrollY -= loopPoint;
+
+  track.style.transform = `translateY(-${scrollY}px)`;
+
+  // Highlight exact center
+  const items = track.children;
+  const centerPixel = scrollY + 200; // 25rem viewport height = 400px → center = 200px
+  let closestIndex = 0;
+  let closestDistance = Infinity;
+
+  Array.from(items).forEach((el, i) => {
+    const itemTop = i * itemHeight;
+    const itemCenter = itemTop + itemHeight / 2;
+    const distance = Math.abs(centerPixel - itemCenter);
+    el.classList.remove("slot-active");
+
+    if (distance < closestDistance) {
+      closestDistance = distance;
+      closestIndex = i;
+    }
+  });
+
+  if (items[closestIndex]) {
+    items[closestIndex].classList.add("slot-active");
+  }
+
+  requestAnimationFrame(animateSlot);
+}
+
+requestAnimationFrame(animateSlot);
+  </script>
+
+
+</body>
+</html>

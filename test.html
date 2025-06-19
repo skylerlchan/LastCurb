@@ -53,7 +53,7 @@
       background: #0a84ff;
       color: #fff;
       border-radius: 6px;
-      transition: background 0.3s;
+      transition: background 0.3s, opacity 0.3s ease;
     }
     .tagline {
       color: #0a84ff;
@@ -111,7 +111,7 @@
   <div class="container">
     <header>
       <div style="display: flex; align-items: center;">
-        <img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="LastCurb Logo" style="height: 32px; margin-right: 12px; border-radius: 6px;" />
+        <img src="lastcurb-logo.png" alt="LastCurb Logo" style="height: 32px; margin-right: 12px; border-radius: 6px;" />
         <span style="font-weight: 800; font-size: 1.2rem;">LASTCURB</span>
       </div>
       <nav>
@@ -123,7 +123,10 @@
 
     <div class="hero">
       <h1>
-        <span class="highlight" id="subject-text">Waymo fleets</span> need to know where to stop.
+        <span class="highlight" id="subject-text">
+          <img src="lastcurb-logo.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;" />
+          Waymo fleets
+        </span> need to know where to stop.
       </h1>
       <div class="tagline">The Curb Intelligence API for Autonomous Fleets and Cities</div>
       <p>
@@ -182,7 +185,7 @@ GET /curb-availability?lat=37.7749&lon=-122.4194
       <h2>Get In Touch</h2>
       <p style="text-align:center;">
         Want to deploy LastCurb in your fleet or city?
-        Contact us at <a href="mailto:skyler@lastcurb.com" style="color:#0a84ff;">founder@lastcurb.com</a>
+        Contact us at <a href="mailto:founder@lastcurb.com" style="color:#0a84ff;">founder@lastcurb.com</a>
       </p>
     </section>
 
@@ -192,26 +195,43 @@ GET /curb-availability?lat=37.7749&lon=-122.4194
   </div>
 
   <script>
+    const logoPath = "lastcurb-logo.png";
+
     const subjects = [
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Waymo fleets',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Uber drivers',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Doordashers',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Amazon Drivers',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">UPS trucks',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">FedEx vans',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Lyft rides',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Instacart shoppers',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">Tesla drivers',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">UPS drivers',
-      '<img src="/mnt/data/A_digital_graphic_design_displays_the_logo_and_bra.png" alt="Logo" style="height: 1em; vertical-align: middle; margin-right: 0.4ch;">You, too'
+      "Waymo fleets",
+      "Uber drivers",
+      "Doordashers",
+      "Amazon Drivers",
+      "UPS trucks",
+      "FedEx vans",
+      "Lyft rides",
+      "Zoox bots",
+      "Instacart shoppers",
+      "Tesla drivers",
+      "USPS drivers",
+      "Airbnb guests",
+      "You, too"
     ];
 
-    let idx = 0;
+    let idx = 1;
+
     function rotateSubject() {
       const elText = document.getElementById('subject-text');
-      elText.innerHTML = subjects[idx];
-      idx = (idx + 1) % subjects.length;
+      elText.style.opacity = 0;
+      setTimeout(() => {
+        elText.innerHTML = `
+          <img 
+            src="${logoPath}" 
+            alt="Logo" 
+            style="height: 1em; vertical-align: middle; margin-right: 0.4ch;" 
+          />
+          ${subjects[idx]}
+        `;
+        elText.style.opacity = 1;
+        idx = (idx + 1) % subjects.length;
+      }, 200);
     }
+
     setInterval(rotateSubject, 2000);
   </script>
 </body>
