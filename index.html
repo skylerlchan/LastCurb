@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LastCurb – The Curb Intelligence API</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #111;
+      line-height: 1.6;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 32px 64px;
+      border-bottom: 1px solid #eee;
+    }
+    nav a {
+      margin-left: 32px;
+      color: #0a84ff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .hero {
+      padding: 120px 64px 80px;
+      background: linear-gradient(145deg, #f4f9ff, #e9f2ff);
+    }
+    .hero h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      max-width: 800px;
+    }
+    .hero .tagline {
+      color: #0a84ff;
+      font-weight: 600;
+      font-size: 1.3rem;
+      margin-top: 20px;
+    }
+    .hero p {
+      margin-top: 20px;
+      font-size: 1.1rem;
+      max-width: 720px;
+    }
+    .button {
+      margin-top: 40px;
+      display: inline-block;
+      background: #0a84ff;
+      color: #fff;
+      padding: 14px 28px;
+      font-weight: 600;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: 0.3s ease;
+    }
+    .button:hover {
+      background: #0066cc;
+    }
+    section {
+      padding: 100px 64px;
+    }
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 32px;
+    }
+    .grid {
+      display: flex;
+      flex-direction: column;
+      gap: 60px;
+    }
+    .grid-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .grid-item img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    pre {
+      background: #f0f4f8;
+      padding: 24px;
+      border-radius: 8px;
+      font-size: 1rem;
+      overflow-x: auto;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 64px;
+      color: #888;
+    }
+    @media (min-width: 768px) {
+      .grid {
+        flex-direction: row;
+      }
+      .grid-item {
+        flex: 1;
+        padding-right: 32px;
+      }
+      .grid-item:last-child {
+        padding-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="font-weight: 800; font-size: 1.2rem;">LASTCURB</div>
+    <nav>
+      <a href="#api">API</a>
+      <a href="#demo">Demo</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Know Where to Stop</h1>
+    <div class="tagline">The Curb Intelligence API for Autonomous Fleets and Cities</div>
+    <p>
+      LastCurb is the real-time infrastructure layer powering robotaxis, delivery fleets, and smart cities.  
+      We provide a live, machine-readable stream of legal curb availability—so vehicles don’t circle, block lanes, or rack up tickets.
+    </p>
+    <a href="#demo" class="button">Launch Demo</a>
+  </div>
+
+  <section id="problem">
+    <h2>The Problem</h2>
+    <p>
+      Robotaxis don’t know where to pull over. Cities can’t enforce curb rules in real time.  
+      Drivers block lanes. Deliveries cause chaos. No system tells machines when, where, and for how long they can legally stop.
+    </p>
+  </section>
+<section id="solution">
+    <h2>The Solution</h2>
+    <div>
+        <h3>For Autonomous Fleets</h3>
+        <p>Plug our API into your navigation stack and receive live curb legality, availability, and duration limits in real-time. Stop wasting time and risking violations.</p>
+        <img src="https://media.giphy.com/media/JtBZmRM9v8sCQ8NBmn/giphy.gif" alt="Robotaxi Animation" />
+    </div>
+</section>
+
+  <section id="api">
+    <h2>Our API</h2>
+    <pre>
+GET /curb-availability?lat=37.7749&lon=-122.4194
+
+{
+  "legal": true,
+  "available": true,
+  "confidence": 0.94,
+  "reason": "green curb, no restrictions now",
+  "next_available": "11:30 AM",
+  "duration_limit": "30 min"
+}
+    </pre>
+    <p>RESTful. Real-time. Machine-readable. The curb as code.</p>
+  </section>
+
+  <section id="demo">
+    <h2>Live Demo</h2>
+    <p>View our pilot map of San Francisco. See where curb space is legal and available—streamed live from the street.</p>
+    <a href="index.html" class="button">Try Demo</a>
+  </section>
+
+  <section id="contact">
+    <h2>Get In Touch</h2>
+    <p>Want to deploy LastCurb in your fleet or city?  
+    Contact us at <a href="mailto:founder@lastcurb.com" style="color:#0a84ff;">founder@lastcurb.com</a></p>
+  </section>
+
+  <footer>
+    &copy; 2025 LastCurb. API-first curbspace infrastructure.
+  </footer>
+
+</body>
+</html>
